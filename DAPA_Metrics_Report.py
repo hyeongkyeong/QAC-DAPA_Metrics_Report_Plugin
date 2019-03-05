@@ -2,8 +2,8 @@
 
 """
     For generating a DAPA Metrics Data Report
-    
-    Author: Hyeonykyeony Seo
+
+    Author: Hyeongkyeong Seo
 
 """
 
@@ -42,17 +42,17 @@ def parse_dapa_metrics(xml_file,metrics_type):
                     metrics_data_one_function[metrics_name]='None'
             metrics_list.append(metrics_data_one_function)
     return metrics_list
-        
+
 def gen_excel_file(metrics_list, metrics_type, options):
     wb=Workbook()
     wsheet=wb.active
     wsheet.title='DAPA_Metrics'
-    
+
     redFill = PatternFill(patternType='solid',fgColor=Color('FFBABA'))
     headerAlignment = Alignment(horizontal='center',vertical='center')
     headerFont = Font(size=12, bold=True)
     datadellAlignment = Alignment(horizontal='center',vertical='center')
-    
+
     wsheet['A1'] = 'File'
     wsheet['B1'] = 'Function'
     wsheet['C1'] = metrics_type[0]
@@ -86,7 +86,7 @@ def gen_excel_file(metrics_list, metrics_type, options):
         if list_data['STXLN'] != 'None' and list_data['STXLN'] > 200:
             wsheet['H'+str(row)].fill=redFill
         row+=1
-        
+
     for i in range(1,9):
         wsheet.cell(row=1,column=i).alignment=headerAlignment
         wsheet.cell(row=1,column=i).font=headerFont
@@ -94,8 +94,8 @@ def gen_excel_file(metrics_list, metrics_type, options):
         for c in range(1,9):
             wsheet.cell(row=r,column=c).alignment = datadellAlignment
     wb.save(options.output_file)
-    
-        
+
+
 if __name__ == "__main__":
     usage ="""
     Given a resuls data xml file, this script generates a Metrics Data Report.

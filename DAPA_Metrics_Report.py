@@ -2,20 +2,19 @@
 
 """
     For generating a DAPA Metrics Data Report
-
+    
+    https://github.com/hyeongkyeong/QAC-DAPA_Metrics_Report_Plugin
+    
     Author: Hyeongkyeong Seo
 
 """
 
-import sys, os, re, datetime, time, codecs, locale
-sys.path.insert(0,os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
+import sys, os, re, datetime, time, codecs, locale, copy
 from optparse import OptionParser
-from xml.dom import minidom
 import xml.etree.ElementTree as ET
 from openpyxl import Workbook
 from openpyxl.cell import Cell
 from openpyxl.styles import Color, PatternFill, Font, Alignment, Border
-import copy
 import Metrics_Data_Report
 
 
@@ -42,17 +41,17 @@ def parse_dapa_metrics(xml_file,metrics_type):
                     metrics_data_one_function[metrics_name]='None'
             metrics_list.append(metrics_data_one_function)
     return metrics_list
-
+        
 def gen_excel_file(metrics_list, metrics_type, options):
     wb=Workbook()
     wsheet=wb.active
     wsheet.title='DAPA_Metrics'
-
+    
     redFill = PatternFill(patternType='solid',fgColor=Color('FFBABA'))
     headerAlignment = Alignment(horizontal='center',vertical='center')
     headerFont = Font(size=12, bold=True)
     datadellAlignment = Alignment(horizontal='center',vertical='center')
-
+    
     wsheet['A1'] = 'File'
     wsheet['B1'] = 'Function'
     wsheet['C1'] = metrics_type[0]
@@ -86,7 +85,7 @@ def gen_excel_file(metrics_list, metrics_type, options):
         if list_data['STXLN'] != 'None' and list_data['STXLN'] > 200:
             wsheet['H'+str(row)].fill=redFill
         row+=1
-
+        
     for i in range(1,9):
         wsheet.cell(row=1,column=i).alignment=headerAlignment
         wsheet.cell(row=1,column=i).font=headerFont
@@ -94,8 +93,8 @@ def gen_excel_file(metrics_list, metrics_type, options):
         for c in range(1,9):
             wsheet.cell(row=r,column=c).alignment = datadellAlignment
     wb.save(options.output_file)
-
-
+    
+        
 if __name__ == "__main__":
     usage ="""
     Given a resuls data xml file, this script generates a Metrics Data Report.

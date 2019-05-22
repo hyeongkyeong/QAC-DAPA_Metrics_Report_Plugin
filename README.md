@@ -15,13 +15,16 @@ The value of metrics is highlighted by red if the function exceeded the limitati
 
 ## Usage
 
-You have to copy these to 'c:\PRQA\PRQA-Framework-2.x.x\report_plugins' directory.
-  * 'DAPA_Metrics_Report.py' file
-  *  python library 'openpyxl'
+You have to copy these to `c:\PRQA\PRQA-Framework-2.x.x\report_plugins` directory.
+  * `DAPA_Metrics_Report.py` file
+  *  `lib` directory
 
-![](assets/markdown-img-paste-20190306002631894.png)
+![](assets/markdown-img-paste-20190522232825620.png)
 
-You can download 'openpyxl' library at here: https://pypi.org/project/openpyxl/#files
+## Note
 
-I had used openpyxl 2.6.1 version.
-Download 'openpyxl-2.6.1.tar.gz' file and decompress it. Then, move the folder named 'openpyxl' to there.
+`lib` directory include python libraries: `openpyxl`, `jdcal`, `et_xmlfile`
+
+  * openpyxl 2.6.1 https://pypi.org/project/openpyxl/#files
+  * jdcal 1.4.1 https://pypi.org/project/jdcal/#files
+  * et_xmlfile 1.0.1 https://pypi.org/project/et_xmlfile/
